@@ -9,20 +9,26 @@
 - **Frontend** (`frontend/`): React + Vite + TypeScript SPA with 21 pages: login, dashboard (KPIs + charts), chart of accounts + GL drill-down, journal entry workflow (create/approve/post/reverse), trial balance, reports hub (P&L, balance sheet, cash flow, aging, budget-vs-actual, department spend, CSV export), invoices, payments, vendors, customers, bank accounts, budgets, petty cash, fixed assets, users & roles, departments, audit logs, notifications, settings.
 - **Verification**: multi-role workflows tested end-to-end (journaling, invoicing, payments, reconciliation); trial balance stays balanced; RBAC enforced; frontend typechecks and production build clean.
 - **Deployment**: `render.yaml` (backend), `netlify.toml` (frontend), `docs/DEPLOYMENT.md`, `.env.example` files.
-- **Git**: work committed on local `master`, rebased cleanly onto GitHub `main` — currently **2 commits ahead of `origin/main`**.
 
-## Current blocker
+## Git / remote
 
-The push to https://github.com/AbdulMoiz162005/PRL-Finance-Web-App.git cannot be completed because this environment has no GitHub credentials:
-- git credential helper returns HTTP 500 for github.com
-- `gh` CLI is not logged in
-- `GITHUB_TOKEN` is not set
+- Work committed on local `master` and **pushed to GitHub**.
+- Remote: https://github.com/AbdulMoiz162005/PRL-Finance-Web-App---Cyber.git
+- Branch `main` on the remote now contains the full project history.
 
-## Required to finish
+## Local development
 
-Provide GitHub authentication in one of these ways:
-1. Paste a GitHub Personal Access Token (repo scope), or
-2. Run `gh auth login` in this environment, or
-3. Set the `GITHUB_TOKEN` environment variable.
+```bash
+# backend
+cd backend && npm install && npm run dev   # API on http://localhost:3001
 
-Once provided, the push will be executed immediately.
+# frontend
+cd frontend && npm install && npm run dev  # SPA on http://localhost:5173 (proxies /api to :3001)
+```
+
+Default sign-in (seeded): `admin@refinery.local` / `Refinery@2024`
+
+## Production deployment
+
+Follow `docs/DEPLOYMENT.md` to deploy the backend to Render and the frontend to
+Netlify with Supabase as the database.
